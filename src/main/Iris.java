@@ -16,6 +16,10 @@ public class Iris {
 		this.genre=genre;
 	}
 
+	public String toString(){
+		return sepallength+";"+sepalwidth+";"+petallength+";"+petalwidth+";"+genre;
+	}
+	
 	public double getSepallength() {
 		return sepallength;
 	}
