@@ -12,32 +12,52 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        String chaine="";
-        String fichier ="iris.arff";
-       
-        try{
-            InputStream ips=new FileInputStream(fichier);
-            InputStreamReader ipsr=new InputStreamReader(ips);
-            BufferedReader br=new BufferedReader(ipsr);
+        String chaine = loadFile("iris.arff");
+        knn(chaine);
+    }
+    
+    /**
+     * Convert the input file as an Object
+     * @param fichier
+     */
+    public static String loadFile(String fichier){
+    	String chaine = "";
+        boolean debut = false;
+        try {
+            InputStream ips = new FileInputStream(fichier);
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            BufferedReader br = new BufferedReader(ipsr);
             String ligne;
-            while ((ligne=br.readLine())!=null){
-                //System.out.println(ligne);
-                if (ligne.length() != 0){
-                    char start = ligne.charAt(0);
- 
-                    if ((int)start != 37 || (int) start != 64){
-                        chaine+=ligne+"\n";
+            while ((ligne = br.readLine()) != null) {
+                if (ligne.equals("@DATA")){
+                    debut = true;
+                }
+                if(debut){
+                    ligne = ligne.replaceAll(".*@DATA", "");
+                    ligne = ligne.replaceAll("%", "");
+                    if (ligne.length() > 0){
+                        chaine += ligne + "\n";                    
                     }
                 }
-               
             }
-            System.out.println(chaine);
             br.close();
-        }      
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
-   
+        return chaine;
+    }
+    
+    
+    
+    
+    
+    
+    /**
+     * Algo of KNN
+     * @param chaine
+     */
+    public static void knn(String chaine){
+    	System.out.println(chaine);
     }
  
 }
