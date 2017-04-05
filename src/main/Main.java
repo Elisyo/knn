@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
  
  
 public class Main {
@@ -13,7 +14,8 @@ public class Main {
      */
     public static void main(String[] args) {
         String chaine = loadFile("iris.arff");
-        knn(chaine);
+        ArrayList<Iris> samples = madeIrisObject(chaine);
+        knn(samples);
     }
     
     /**
@@ -47,17 +49,23 @@ public class Main {
         return chaine;
     }
     
-    
-    
-    
-    
+    /**
+     * Construct all the iris values
+     * @param chaine
+     * @return
+     */
+    public static ArrayList<Iris> madeIrisObject(String chaine){
+    	return null;
+    }
     
     /**
      * Algo of KNN
      * @param chaine
      */
-    public static void knn(String chaine){
-    	System.out.println(chaine);
+    public static void knn(ArrayList<Iris> samples){
+    	for(Iris s : samples){
+    		System.out.println(s);
+    	}
     }
  
 }
