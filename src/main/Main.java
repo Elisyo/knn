@@ -1,9 +1,11 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
  
  
@@ -15,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         String chaine = loadFile("iris.arff");
         ArrayList<Iris> samples = madeIrisObject(chaine);
-        knn(samples);
+        //knn(samples);
     }
     
     /**
@@ -55,7 +57,23 @@ public class Main {
      * @return
      */
     public static ArrayList<Iris> madeIrisObject(String chaine){
-    	return null;
+    	ArrayList<Iris> result = new ArrayList<Iris>();
+    	try {
+            InputStream ips = new ByteArrayInputStream(chaine.getBytes(StandardCharsets.UTF_8));
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            BufferedReader br = new BufferedReader(ipsr);
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+            	
+            	
+            	
+                System.out.println(ligne);
+            }
+            br.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    	return result;
     }
     
     /**
