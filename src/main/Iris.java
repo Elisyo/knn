@@ -8,6 +8,13 @@ public class Iris {
 	double petalwidth;
 	String genre;
 	
+	Iris(double sepallength, double sepalwidth, double petallength, double petalwidth){
+		this.sepallength=sepallength;
+		this.sepalwidth=sepalwidth;
+		this.petallength=petallength;
+		this.petalwidth=petalwidth;
+	}
+	
 	Iris(double sepallength, double sepalwidth, double petallength, double petalwidth, String genre){
 		this.sepallength=sepallength;
 		this.sepalwidth=sepalwidth;

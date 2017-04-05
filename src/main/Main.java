@@ -7,10 +7,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
  
  
 public class Main {
  
+	static Iris irisTest = new Iris(5.1, 2.6, 1.1, 0.3);
+	
     /**
      * @param args
      */
@@ -81,13 +91,43 @@ public class Main {
     }
     
     /**
-     * Algo of KNN
+     * Algo of KNN for Iris
      * @param chaine
      */
-    public static void knn(ArrayList<Iris> samples){
-    	for(Iris s : samples){
-    		System.out.println(s);
-    	}
+    public static void knn(ArrayList<Iris> listeIris){
+    	HashMap<Iris, Double> mapIris = new HashMap<Iris, Double>();
+    	for (int i=0; i<listeIris.size();i++){
+            double distanceSepallength = (irisTest.getSepallength() - listeIris.get(i).getSepallength())*(irisTest.getSepallength() - listeIris.get(i).getSepallength());
+            double distanceSepalwidth = (irisTest.getSepalwidth() - listeIris.get(i).getSepalwidth())*(irisTest.getSepalwidth() - listeIris.get(i).getSepalwidth());
+            double distancePetallength = (irisTest.getPetallength() - listeIris.get(i).getPetallength())*(irisTest.getPetallength() - listeIris.get(i).getPetallength());
+            double distancePetalwidth = (irisTest.getSepalwidth() - listeIris.get(i).getSepalwidth())*(irisTest.getSepalwidth() - listeIris.get(i).getSepalwidth());
+            double distance = Math.sqrt((distanceSepallength+distanceSepalwidth+distancePetallength+distancePetalwidth));
+            mapIris.put(listeIris.get(i), distance);
+        }
+        mapIris = triAvecValeur(mapIris);
+        for(Entry<Iris, Double> entry : mapIris.entrySet()) {
+            Iris cle = entry.getKey();
+            double distance = entry.getValue();
+            System.out.println(distance +"-->"+cle.getGenre());
+        }
     }
- 
+    
+    /**
+     * 
+     * @param map
+     * @return
+     */
+    public static HashMap<Iris, Double> triAvecValeur( HashMap<Iris, Double> map ){
+        List<Entry<Iris, Double>> list =
+             new LinkedList<Map.Entry<Iris, Double>>( map.entrySet() );
+        Collections.sort( list, new Comparator<Map.Entry<Iris, Double>>(){
+           public int compare( Map.Entry<Iris, Double> o1, Map.Entry<Iris, Double> o2 ){
+               return (o1.getValue()).compareTo( o2.getValue());
+           }
+        });
+        HashMap<Iris, Double> map_apres = new LinkedHashMap<Iris, Double>();
+        for(Map.Entry<Iris, Double> entry : list)
+          map_apres.put( entry.getKey(), entry.getValue() );
+        return map_apres;
+     }
 }
