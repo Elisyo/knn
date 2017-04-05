@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         String chaine = loadFile("iris.arff");
         ArrayList<Iris> samples = madeIrisObject(chaine);
-        //knn(samples);
+        knn(samples);
     }
     
     /**
@@ -64,10 +64,14 @@ public class Main {
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine()) != null) {
-            	
-            	
-            	
-                System.out.println(ligne);
+            	if(ligne.length()>0){
+            		result.add(new Iris(Double.parseDouble(ligne.substring(0,3)),
+            				Double.parseDouble(ligne.substring(4,7)),
+            				Double.parseDouble(ligne.substring(8,11)),
+            				Double.parseDouble(ligne.substring(12,15)),
+            				ligne.substring(16)));
+            	}
+                //System.out.println(ligne);
             }
             br.close();
         } catch (Exception e) {
