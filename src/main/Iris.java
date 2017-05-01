@@ -1,7 +1,6 @@
 package main;
 
 public class Iris {
-	
 	double sepallength;
 	double sepalwidth;
 	double petallength;
