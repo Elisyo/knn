@@ -304,18 +304,18 @@ public class Main {
 		}
 	}
 	
-	public static void genererResultatIMDB(HashMap<Movie, Double> mapMovie, HashMap<Double, Integer> resultat){
+	public static void genererResultatIMDB(HashMap<Movie, Double> mapMovie, HashMap<Double, Integer> resultat_imdb_score){
 		int cpt = 0;
 
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
 
 			if (cpt < 10) {
 				Movie cle = entry.getKey();
-				if (resultat.containsKey(cle.getImdb_score())){
-					int repetition = resultat.get(cle.getImdb_score());
-					resultat.put(cle.getImdb_score(), ++repetition);
+				if (resultat_imdb_score.containsKey(cle.getImdb_score())){
+					int repetition = resultat_imdb_score.get(cle.getImdb_score());
+					resultat_imdb_score.put(cle.getImdb_score(), ++repetition);
 				}else{
-					resultat.put(cle.getImdb_score(), 1);
+					resultat_imdb_score.put(cle.getImdb_score(), 1);
 				}
 				cpt++;
 			}
@@ -338,11 +338,11 @@ public class Main {
 		return "La prédiction est que l'iris sera de type: " + prediction;
 	}
 	
-	public static String predictionIMDB(HashMap<Double, Integer> resultat){
+	public static String predictionIMDB(HashMap<Double, Integer> resultat_imdb_score){
 		int max = 0;
 		Double prediction = 0.0;
 
-		for (Entry<Double, Integer> entry2 : resultat.entrySet()) {
+		for (Entry<Double, Integer> entry2 : resultat_imdb_score.entrySet()) {
 			Double cle2 = entry2.getKey();
 			int res = entry2.getValue();
 
