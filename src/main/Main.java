@@ -137,9 +137,11 @@ public class Main {
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
 				if(ligne.length()>0){
-					//contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
-					
-					
+					for(int i = 0;i<27;i++){
+						contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
+						ligne.substring(ligne.indexOf(','));
+					}
+					contenuLigne.add(ligne);
 					
 					result.add(new Movie(ligne, ligne, 0, 0, 0, 0, ligne, 0, 0, ligne, ligne, ligne, 0, 0, ligne, 0, ligne, ligne, 0, ligne, ligne, ligne, 0, null, 0, 0, 0, 0, 0));
 				}
