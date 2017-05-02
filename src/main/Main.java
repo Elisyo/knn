@@ -22,8 +22,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		executeIris();
-		//executeMovie();
+		//executeIris();
+		executeMovie();
 	}
 	
 	/**
@@ -59,6 +59,7 @@ public class Main {
 		mapMovie = triAvecValeurMovie(mapMovie);
 		genererResultatIMDB(mapMovie, resultat_imdb_score);
 		System.out.println(predictionIMDB(resultat_imdb_score));
+		
 	}
 
 	/**
@@ -128,6 +129,7 @@ public class Main {
 	 */
 	public static ArrayList<Movie> madeMovieObject(String chaine){
 		ArrayList<Movie> result = new ArrayList<Movie>();
+		ArrayList<Object> contenuLigne = new ArrayList<Object>();
 		try {
 			InputStream ips = new ByteArrayInputStream(chaine.getBytes(StandardCharsets.UTF_8));
 			InputStreamReader ipsr = new InputStreamReader(ips);
@@ -135,13 +137,13 @@ public class Main {
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
 				if(ligne.length()>0){
-					result.add(new Iris(Double.parseDouble(ligne.substring(0,3)),
-							Double.parseDouble(ligne.substring(4,7)),
-							Double.parseDouble(ligne.substring(8,11)),
-							Double.parseDouble(ligne.substring(12,15)),
-							ligne.substring(16)));
+					//contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
+					
+					
+					
+					result.add(new Movie(ligne, ligne, 0, 0, 0, 0, ligne, 0, 0, ligne, ligne, ligne, 0, 0, ligne, 0, ligne, ligne, 0, ligne, ligne, ligne, 0, null, 0, 0, 0, 0, 0));
 				}
-				//System.out.println(ligne);
+				System.out.println("ligne : " + ligne);
 			}
 			br.close();
 		} catch (Exception e) {
@@ -323,5 +325,4 @@ public class Main {
 		}
 		return "La prédiction est que le score imdb sera : " + prediction;
 	}  
-}
 }
