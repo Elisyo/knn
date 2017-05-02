@@ -26,7 +26,7 @@ public class Movie {
 	String country ;
 	String content_rating;
 	double budget;
-	Date title_year;
+	int title_year;
 	double actor_2_facebook_likes ;
 	double imdb_score ;
 	double aspect_ratio ;
@@ -37,7 +37,7 @@ public class Movie {
 			double actor_3_facebook_likes,String actor_2_name, double actor_1_facebook_likes, double gross, String genres,
 			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
 			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
-			String country, String content_rating, double budget, Date title_year,	double actor_2_facebook_likes,
+			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,
 			double aspect_ratio, double movie_facebook_likes ){
 		this.color=color;
 		this.director_name=director_name;
@@ -72,7 +72,7 @@ public class Movie {
 			double actor_3_facebook_likes,String actor_2_name, double actor_1_facebook_likes, double gross, String genres,
 			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
 			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
-			String country, String content_rating, double budget, Date title_year,	double actor_2_facebook_likes,
+			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,
 			double aspect_ratio, double movie_facebook_likes, double imdb_score, double ratio_rentabilite){
 		this.color=color;
 		this.director_name=director_name;
@@ -290,11 +290,11 @@ public class Movie {
 		this.budget = budget;
 	}
 
-	public Date getTitle_year() {
+	public int getTitle_year() {
 		return title_year;
 	}
 
-	public void setTitle_year(Date title_year) {
+	public void setTitle_year(int title_year) {
 		this.title_year = title_year;
 	}
 

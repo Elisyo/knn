@@ -47,19 +47,23 @@ public class Main {
 	 * Execute knn for movie.arff
 	 */
 	public static void executeMovie(){
-		Movie movieTest = new Movie(null, null, 0, 0, 0, 0, null, 0, 0, null, null, null, 0, 0, null, 0, null, null, 0, null, null, null, 0, null, 0, 0, 0);
+		
+		Movie movieTest = new Movie("Color","Tim Burton",451,108,13000,11000,"Alan Rickman",40000,334185206,"Adventure|Family|Fantasy","Johnny Depp","Alice in Wonderland",
+				306336,79957,"Anne Hathaway",0,"alice in wonderland|mistaking reality for dream|queen|shrinking|shrinking potion",
+				"http://www.imdb.com/title/tt1014759/?ref_=fn_tt_tt_13",736,"English","USA","PG",200000000,2010,25000,6.5,1.85,24000,1.67092603);
+		
 		HashMap<Movie, Double> mapMovie = new HashMap<Movie, Double>();
 		HashMap<Double, Integer> resultat_imdb_score = new HashMap<Double, Integer>();
 		HashMap<Double, Integer> resultat_ratio_rentabilite = new HashMap<Double, Integer>();
 		
 		String chaine = loadFile("movie.arff");
 		ArrayList<Movie> listeMovie = madeMovieObject(chaine);
-		/*
+		
 		mapMovie = genererCalculDistanceMovieIMDB(movieTest, listeMovie);
 		mapMovie = triAvecValeurMovie(mapMovie);
 		genererResultatIMDB(mapMovie, resultat_imdb_score);
 		System.out.println(predictionIMDB(resultat_imdb_score));
-		*/
+		
 	}
 
 	/**
@@ -81,6 +85,9 @@ public class Main {
 				if(debut){
 					ligne = ligne.replaceAll(".*@data", "");
 					ligne = ligne.replaceAll("%", "");
+					ligne = ligne.replaceAll(" '", "");
+					ligne = ligne.replaceAll("' ", "");
+					ligne = ligne.replaceAll("'", "");
 					if (ligne.length() > 0){
 						chaine += ligne + "\n";                    
 					}
@@ -137,29 +144,36 @@ public class Main {
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
 				if(ligne.length()>0){
-					for(int i = 0;i<27;i++){
-						if(ligne.substring(0, ligne.indexOf(',')).contains("?")){
-							contenuLigne.addAll(null);
+					contenuLigne.clear();
+					for(int i = 0;i<28;i++){
+						if(ligne.substring(0, ligne.indexOf(',')).contains("?") || ligne.substring(0, ligne.indexOf(',')).equals("")){
+							contenuLigne.add(null);
 						}else{
 							contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
 						}
-						ligne.substring(ligne.indexOf(','));
+						ligne = ligne.substring(ligne.indexOf(',')+1);
 					}
 					contenuLigne.add(ligne);
 					
-					result.add(new Movie(contenuLigne.get(0), contenuLigne.get(1), Double.parseDouble(contenuLigne.get(2)),
-							Double.parseDouble(contenuLigne.get(3)), Double.parseDouble(contenuLigne.get(4)),
-							Double.parseDouble(contenuLigne.get(5)), contenuLigne.get(6), Double.parseDouble(contenuLigne.get(7)),
-							Double.parseDouble(contenuLigne.get(8)), contenuLigne.get(9), (String) contenuLigne.get(10),
-							contenuLigne.get(11), Double.parseDouble(contenuLigne.get(12)), Double.parseDouble(contenuLigne.get(13)),
-							contenuLigne.get(14),Double.parseDouble(contenuLigne.get(15)), contenuLigne.get(16), contenuLigne.get(17),
-							Double.parseDouble(contenuLigne.get(18)), contenuLigne.get(19), contenuLigne.get(20),contenuLigne.get(21),
-							Double.parseDouble(contenuLigne.get(22)), null, Double.parseDouble(contenuLigne.get(24)),
-							Double.parseDouble(contenuLigne.get(25)), Double.parseDouble(contenuLigne.get(26)), Double.parseDouble(contenuLigne.get(27)),
-							Double.parseDouble(contenuLigne.get(28))));
+					try{
+						// we have to change the null in 0.0 for the double
+						result.add(new Movie(contenuLigne.get(0), contenuLigne.get(1), Double.parseDouble(contenuLigne.get(2)),
+								Double.parseDouble(contenuLigne.get(3)), Double.parseDouble(contenuLigne.get(4)),
+								Double.parseDouble(contenuLigne.get(5)), contenuLigne.get(6), Double.parseDouble(contenuLigne.get(7)),
+								Double.parseDouble(contenuLigne.get(8)), contenuLigne.get(9), (String) contenuLigne.get(10),
+								contenuLigne.get(11), Double.parseDouble(contenuLigne.get(12)), Double.parseDouble(contenuLigne.get(13)),
+								contenuLigne.get(14),Double.parseDouble(contenuLigne.get(15)), contenuLigne.get(16), contenuLigne.get(17),
+								Double.parseDouble(contenuLigne.get(18)), contenuLigne.get(19), contenuLigne.get(20),contenuLigne.get(21),
+								Double.parseDouble(contenuLigne.get(22)), Integer.parseInt(contenuLigne.get(23)), Double.parseDouble(contenuLigne.get(24)),
+								Double.parseDouble(contenuLigne.get(25)), Double.parseDouble(contenuLigne.get(26)), Double.parseDouble(contenuLigne.get(27)),
+								Double.parseDouble(contenuLigne.get(28))));
+					}catch(Exception e){
+						//System.out.println("With null exception, obviously but those are not taken in fact");
+					}
 				}
-				System.out.println("ligne : " + ligne);
+				//System.out.println("ligne : " + ligne);
 			}
+			//System.out.println(contenuLigne.size());
 			br.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -234,7 +248,6 @@ public class Main {
 		HashMap<Movie, Double> mapMovie = new HashMap<Movie, Double>();
 
 		for (int i = 0; i < listeMovie.size(); i++) {
-
 			double distanceActor_1_facebook_likes = (movieTest.getActor_1_facebook_likes() - listeMovie
 					.get(i).getActor_1_facebook_likes())
 					* (movieTest.getActor_1_facebook_likes() - listeMovie.get(i)
@@ -267,8 +280,8 @@ public class Main {
 					.sqrt((distanceActor_1_facebook_likes + distanceActor_2_facebook_likes
 							+ distanceActor_3_facebook_likes + distanceMovie_facebook_likes + 
 							distanceBudget + distanceCountry));
+			//System.out.println(distance);
 			mapMovie.put(listeMovie.get(i), distance);
-
 		}
 		return mapMovie;
 	}
@@ -338,6 +351,7 @@ public class Main {
 				prediction = cle2;
 			}
 		}
+		System.out.println("it should be 6.5");
 		return "La prédiction est que le score imdb sera : " + prediction;
 	}  
 }
