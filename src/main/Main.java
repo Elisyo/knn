@@ -54,12 +54,12 @@ public class Main {
 		
 		String chaine = loadFile("movie.arff");
 		ArrayList<Movie> listeMovie = madeMovieObject(chaine);
-		
+		/*
 		mapMovie = genererCalculDistanceMovieIMDB(movieTest, listeMovie);
 		mapMovie = triAvecValeurMovie(mapMovie);
 		genererResultatIMDB(mapMovie, resultat_imdb_score);
 		System.out.println(predictionIMDB(resultat_imdb_score));
-		
+		*/
 	}
 
 	/**
@@ -75,11 +75,11 @@ public class Main {
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
-				if (ligne.equals("@DATA")){
+				if (ligne.equals("@data")){
 					debut = true;
 				}
 				if(debut){
-					ligne = ligne.replaceAll(".*@DATA", "");
+					ligne = ligne.replaceAll(".*@data", "");
 					ligne = ligne.replaceAll("%", "");
 					if (ligne.length() > 0){
 						chaine += ligne + "\n";                    
@@ -129,7 +129,7 @@ public class Main {
 	 */
 	public static ArrayList<Movie> madeMovieObject(String chaine){
 		ArrayList<Movie> result = new ArrayList<Movie>();
-		ArrayList<Object> contenuLigne = new ArrayList<Object>();
+		ArrayList<String> contenuLigne = new ArrayList<String>();
 		try {
 			InputStream ips = new ByteArrayInputStream(chaine.getBytes(StandardCharsets.UTF_8));
 			InputStreamReader ipsr = new InputStreamReader(ips);
@@ -143,15 +143,16 @@ public class Main {
 					}
 					contenuLigne.add(ligne);
 					
-					result.add(new Movie((String) contenuLigne.get(0), (String) contenuLigne.get(1), (double) contenuLigne.get(2),
-							(double) contenuLigne.get(3), (double) contenuLigne.get(4), (double) contenuLigne.get(5),
-							(String) contenuLigne.get(6), (double) contenuLigne.get(7), (double) contenuLigne.get(8),
-							(String) contenuLigne.get(9), (String) contenuLigne.get(10), (String) contenuLigne.get(11),
-							(double) contenuLigne.get(12), (double) contenuLigne.get(13), (String) contenuLigne.get(14),
-							(double) contenuLigne.get(15), (String) contenuLigne.get(16), (String) contenuLigne.get(17),
-							(double) contenuLigne.get(18), (String) contenuLigne.get(19), (String) contenuLigne.get(20),
-							(String) contenuLigne.get(21), (double) contenuLigne.get(22), null, (double) contenuLigne.get(24),
-							(double) contenuLigne.get(25), (double) contenuLigne.get(26), (double) contenuLigne.get(27), (double) contenuLigne.get(28)));
+					result.add(new Movie(contenuLigne.get(0), contenuLigne.get(1), Double.parseDouble(contenuLigne.get(2)),
+							Double.parseDouble(contenuLigne.get(3)), Double.parseDouble(contenuLigne.get(4)),
+							Double.parseDouble(contenuLigne.get(5)), contenuLigne.get(6), Double.parseDouble(contenuLigne.get(7)),
+							Double.parseDouble(contenuLigne.get(8)), contenuLigne.get(9), (String) contenuLigne.get(10),
+							contenuLigne.get(11), Double.parseDouble(contenuLigne.get(12)), Double.parseDouble(contenuLigne.get(13)),
+							contenuLigne.get(14),Double.parseDouble(contenuLigne.get(15)), contenuLigne.get(16), contenuLigne.get(17),
+							Double.parseDouble(contenuLigne.get(18)), contenuLigne.get(19), contenuLigne.get(20),contenuLigne.get(21),
+							Double.parseDouble(contenuLigne.get(22)), null, Double.parseDouble(contenuLigne.get(24)),
+							Double.parseDouble(contenuLigne.get(25)), Double.parseDouble(contenuLigne.get(26)), Double.parseDouble(contenuLigne.get(27)),
+							Double.parseDouble(contenuLigne.get(28))));
 				}
 				System.out.println("ligne : " + ligne);
 			}
