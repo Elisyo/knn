@@ -138,7 +138,11 @@ public class Main {
 			while ((ligne = br.readLine()) != null) {
 				if(ligne.length()>0){
 					for(int i = 0;i<27;i++){
-						contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
+						if(ligne.substring(0, ligne.indexOf(',')).contains("?")){
+							contenuLigne.addAll(null);
+						}else{
+							contenuLigne.add(ligne.substring(0, ligne.indexOf(',')));
+						}
 						ligne.substring(ligne.indexOf(','));
 					}
 					contenuLigne.add(ligne);
