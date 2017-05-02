@@ -32,13 +32,15 @@ public class Movie {
 	double aspect_ratio ;
 	double movie_facebook_likes ;
 	double ratio_rentabilite ;
-
+	String statut_rentabilite;
+	String ratio_imdb;
+	
 	Movie(String color, String director_name, double num_critic_for_reviews, double duration, double director_facebook_likes,
 			double actor_3_facebook_likes,String actor_2_name, double actor_1_facebook_likes, double gross, String genres,
 			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
 			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
-			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,
-			double aspect_ratio, double movie_facebook_likes ){
+			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,  double imdb_score,
+			double aspect_ratio, double movie_facebook_likes, double ratio_rentabilite){
 		this.color=color;
 		this.director_name=director_name;
 		this.num_critic_for_reviews=num_critic_for_reviews;
@@ -64,8 +66,10 @@ public class Movie {
 		this.budget=budget;
 		this.title_year=title_year;
 		this.actor_2_facebook_likes=actor_2_facebook_likes;
+		this.imdb_score=imdb_score;
 		this.aspect_ratio=aspect_ratio;
 		this.movie_facebook_likes=movie_facebook_likes;
+		this.ratio_rentabilite=ratio_rentabilite;
 	}
 
 	Movie(String color, String director_name, double num_critic_for_reviews, double duration, double director_facebook_likes,
@@ -73,7 +77,8 @@ public class Movie {
 			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
 			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
 			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,
-			double aspect_ratio, double movie_facebook_likes, double imdb_score, double ratio_rentabilite){
+			double aspect_ratio, double movie_facebook_likes, double imdb_score, double ratio_rentabilite, String statut_rentabilite,
+			String ratio_imdb){
 		this.color=color;
 		this.director_name=director_name;
 		this.num_critic_for_reviews=num_critic_for_reviews;
@@ -103,9 +108,10 @@ public class Movie {
 		this.movie_facebook_likes=movie_facebook_likes;
 		this.imdb_score=imdb_score;
 		this.ratio_rentabilite=ratio_rentabilite;
+		this.statut_rentabilite=statut_rentabilite;
+		this.ratio_imdb=ratio_imdb;
 	}
 
-	
 	public String getColor() {
 		return color;
 	}
@@ -336,5 +342,22 @@ public class Movie {
 
 	public void setRatio_rentabilite(double ratio_rentabilite) {
 		this.ratio_rentabilite = ratio_rentabilite;
-	}	
+	}
+
+	public String getStatut_rentabilite() {
+		return statut_rentabilite;
+	}
+
+	public void setStatut_rentabilite(String statut_rentabilite) {
+		this.statut_rentabilite = statut_rentabilite;
+	}
+
+	public String getRatio_imdb() {
+		return ratio_imdb;
+	}
+
+	public void setRatio_imdb(String ratio_imdb) {
+		this.ratio_imdb = ratio_imdb;
+	}
+	
 }

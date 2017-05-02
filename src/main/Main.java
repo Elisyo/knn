@@ -85,6 +85,7 @@ public class Main {
 				if(debut){
 					ligne = ligne.replaceAll(".*@data", "");
 					ligne = ligne.replaceAll("%", "");
+					ligne = ligne.replaceAll(" ' ", "");
 					ligne = ligne.replaceAll(" '", "");
 					ligne = ligne.replaceAll("' ", "");
 					ligne = ligne.replaceAll("'", "");
