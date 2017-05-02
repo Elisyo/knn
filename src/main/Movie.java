@@ -1,115 +1,117 @@
 package main;
 
-import java.util.Date;
-
 public class Movie {
 	String color;
 	String director_name;
-	double num_critic_for_reviews;
-	double duration;
-	double director_facebook_likes;
-	double actor_3_facebook_likes ;
-	String actor_2_name ;
-	double actor_1_facebook_likes ;
-	double gross ;
-	String genres ;
-	String actor_1_name ;
-	String movie_title ;
-	double num_voted_users ;
-	double cast_total_facebook_likes ;
-	String actor_3_name ;
-	double facenumber_in_poster ;
-	String plot_keywords ;
-	String movie_imdb_link ;
-	double num_user_for_reviews ;
-	String language ;
-	String country ;
+	int num_critic_for_reviews;
+	int duration;
+	int director_facebook_likes;
+	int actor_3_facebook_likes;
+	String actor_2_name;
+	int actor_1_facebook_likes;
+	double gross;
+	String genres;
+	String actor_1_name;
+	String movie_title;
+	int num_voted_users;
+	int cast_total_facebook_likes;
+	String actor_3_name;
+	int facenumber_in_poster;
+	String plot_keywords;
+	String movie_imdb_link;
+	int num_user_for_reviews;
+	String language;
+	String country;
 	String content_rating;
 	double budget;
 	int title_year;
-	double actor_2_facebook_likes ;
-	double imdb_score ;
-	double aspect_ratio ;
-	double movie_facebook_likes ;
-	double ratio_rentabilite ;
+	int actor_2_facebook_likes;
+	double imdb_score;
+	double aspect_ratio;
+	int movie_facebook_likes;
+	double ratio_rentabilite;
 	String statut_rentabilite;
 	String ratio_imdb;
-	
-	Movie(String color, String director_name, double num_critic_for_reviews, double duration, double director_facebook_likes,
-			double actor_3_facebook_likes,String actor_2_name, double actor_1_facebook_likes, double gross, String genres,
-			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
-			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
-			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,  double imdb_score,
-			double aspect_ratio, double movie_facebook_likes, double ratio_rentabilite){
-		this.color=color;
-		this.director_name=director_name;
-		this.num_critic_for_reviews=num_critic_for_reviews;
-		this.duration=duration;
-		this.director_facebook_likes=director_facebook_likes;
-		this.actor_3_facebook_likes=actor_3_facebook_likes;
-		this.actor_2_name=actor_2_name;
-		this.actor_1_facebook_likes=actor_1_facebook_likes;
-		this.gross=gross;
-		this.genres=genres;
-		this.actor_1_name=actor_1_name;
-		this.movie_title=movie_title;
-		this.num_voted_users=num_voted_users;
-		this.cast_total_facebook_likes=cast_total_facebook_likes;
-		this.actor_3_name=actor_3_name;
-		this.facenumber_in_poster=facenumber_in_poster;
-		this.plot_keywords=plot_keywords;
-		this.movie_imdb_link=movie_imdb_link;
-		this.num_user_for_reviews=num_user_for_reviews;
-		this.language=language;
-		this.country=country;
-		this.content_rating=content_rating;
-		this.budget=budget;
-		this.title_year=title_year;
-		this.actor_2_facebook_likes=actor_2_facebook_likes;
-		this.imdb_score=imdb_score;
-		this.aspect_ratio=aspect_ratio;
-		this.movie_facebook_likes=movie_facebook_likes;
-		this.ratio_rentabilite=ratio_rentabilite;
+
+	Movie(String color, String director_name, int num_critic_for_reviews, int duration, int director_facebook_likes,
+			int actor_3_facebook_likes, String actor_2_name, int actor_1_facebook_likes, double gross, String genres,
+			String actor_1_name, String movie_title, int num_voted_users, int cast_total_facebook_likes,
+			String actor_3_name, int facenumber_in_poster, String plot_keywords, String movie_imdb_link,
+			int num_user_for_reviews, String language, String country, String content_rating, double budget,
+			int title_year, int actor_2_facebook_likes, double imdb_score, double aspect_ratio,
+			int movie_facebook_likes, double ratio_rentabilite) {
+		this.color = color;
+		this.director_name = director_name;
+		this.num_critic_for_reviews = num_critic_for_reviews;
+		this.duration = duration;
+		this.director_facebook_likes = director_facebook_likes;
+		this.actor_3_facebook_likes = actor_3_facebook_likes;
+		this.actor_2_name = actor_2_name;
+		this.actor_1_facebook_likes = actor_1_facebook_likes;
+		this.gross = gross;
+		this.genres = genres;
+		this.actor_1_name = actor_1_name;
+		this.movie_title = movie_title;
+		this.num_voted_users = num_voted_users;
+		this.cast_total_facebook_likes = cast_total_facebook_likes;
+		this.actor_3_name = actor_3_name;
+		this.facenumber_in_poster = facenumber_in_poster;
+		this.plot_keywords = plot_keywords;
+		this.movie_imdb_link = movie_imdb_link;
+		this.num_user_for_reviews = num_user_for_reviews;
+		this.language = language;
+		this.country = country;
+		this.content_rating = content_rating;
+		this.budget = budget;
+		this.title_year = title_year;
+		this.actor_2_facebook_likes = actor_2_facebook_likes;
+		this.imdb_score = imdb_score;
+		this.aspect_ratio = aspect_ratio;
+		this.movie_facebook_likes = movie_facebook_likes;
+		this.ratio_rentabilite = ratio_rentabilite;
 	}
 
-	Movie(String color, String director_name, double num_critic_for_reviews, double duration, double director_facebook_likes,
-			double actor_3_facebook_likes,String actor_2_name, double actor_1_facebook_likes, double gross, String genres,
-			String actor_1_name, String movie_title, double num_voted_users , double cast_total_facebook_likes, String actor_3_name,
-			double facenumber_in_poster, String plot_keywords, String movie_imdb_link , double num_user_for_reviews, String language,
-			String country, String content_rating, double budget, int title_year,	double actor_2_facebook_likes,
-			double aspect_ratio, double movie_facebook_likes, double imdb_score, double ratio_rentabilite, String statut_rentabilite,
-			String ratio_imdb){
-		this.color=color;
-		this.director_name=director_name;
-		this.num_critic_for_reviews=num_critic_for_reviews;
-		this.duration=duration;
-		this.director_facebook_likes=director_facebook_likes;
-		this.actor_3_facebook_likes=actor_3_facebook_likes;
-		this.actor_2_name=actor_2_name;
-		this.actor_1_facebook_likes=actor_1_facebook_likes;
-		this.gross=gross;
-		this.genres=genres;
-		this.actor_1_name=actor_1_name;
-		this.movie_title=movie_title;
-		this.num_voted_users=num_voted_users;
-		this.cast_total_facebook_likes=cast_total_facebook_likes;
-		this.actor_3_name=actor_3_name;
-		this.facenumber_in_poster=facenumber_in_poster;
-		this.plot_keywords=plot_keywords;
-		this.movie_imdb_link=movie_imdb_link;
-		this.num_user_for_reviews=num_user_for_reviews;
-		this.language=language;
-		this.country=country;
-		this.content_rating=content_rating;
-		this.budget=budget;
-		this.title_year=title_year;
-		this.actor_2_facebook_likes=actor_2_facebook_likes;
-		this.aspect_ratio=aspect_ratio;
-		this.movie_facebook_likes=movie_facebook_likes;
-		this.imdb_score=imdb_score;
-		this.ratio_rentabilite=ratio_rentabilite;
-		this.statut_rentabilite=statut_rentabilite;
-		this.ratio_imdb=ratio_imdb;
+	Movie(String color, String director_name, int num_critic_for_reviews, int duration, int director_facebook_likes,
+			int actor_3_facebook_likes, String actor_2_name, int actor_1_facebook_likes, double gross, String genres,
+			String actor_1_name, String movie_title, int num_voted_users, int cast_total_facebook_likes,
+			String actor_3_name, int facenumber_in_poster, String plot_keywords, String movie_imdb_link,
+			int num_user_for_reviews, String language, String country, String content_rating, double budget,
+			int title_year, int actor_2_facebook_likes, double imdb_score, double aspect_ratio,
+			int movie_facebook_likes, double ratio_rentabilite, String statut_rentabilite, String ratio_imdb) {
+		this.color = color;
+		this.director_name = director_name;
+		this.num_critic_for_reviews = num_critic_for_reviews;
+		this.duration = duration;
+		this.director_facebook_likes = director_facebook_likes;
+		this.actor_3_facebook_likes = actor_3_facebook_likes;
+		this.actor_2_name = actor_2_name;
+		this.actor_1_facebook_likes = actor_1_facebook_likes;
+		this.gross = gross;
+		this.genres = genres;
+		this.actor_1_name = actor_1_name;
+		this.movie_title = movie_title;
+		this.num_voted_users = num_voted_users;
+		this.cast_total_facebook_likes = cast_total_facebook_likes;
+		this.actor_3_name = actor_3_name;
+		this.facenumber_in_poster = facenumber_in_poster;
+		this.plot_keywords = plot_keywords;
+		this.movie_imdb_link = movie_imdb_link;
+		this.num_user_for_reviews = num_user_for_reviews;
+		this.language = language;
+		this.country = country;
+		this.content_rating = content_rating;
+		this.budget = budget;
+		this.title_year = title_year;
+		this.actor_2_facebook_likes = actor_2_facebook_likes;
+		this.aspect_ratio = aspect_ratio;
+		this.movie_facebook_likes = movie_facebook_likes;
+		this.imdb_score = imdb_score;
+		this.ratio_rentabilite = ratio_rentabilite;
+		this.statut_rentabilite = statut_rentabilite;
+		this.ratio_imdb = ratio_imdb;
+	}
+
+	public Movie() {
 	}
 
 	public String getColor() {
@@ -128,35 +130,35 @@ public class Movie {
 		this.director_name = director_name;
 	}
 
-	public double getNum_critic_for_reviews() {
+	public int getNum_critic_for_reviews() {
 		return num_critic_for_reviews;
 	}
 
-	public void setNum_critic_for_reviews(double num_critic_for_reviews) {
+	public void setNum_critic_for_reviews(int num_critic_for_reviews) {
 		this.num_critic_for_reviews = num_critic_for_reviews;
 	}
 
-	public double getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(double duration) {
+	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 
-	public double getDirector_facebook_likes() {
+	public int getDirector_facebook_likes() {
 		return director_facebook_likes;
 	}
 
-	public void setDirector_facebook_likes(double director_facebook_likes) {
+	public void setDirector_facebook_likes(int director_facebook_likes) {
 		this.director_facebook_likes = director_facebook_likes;
 	}
 
-	public double getActor_3_facebook_likes() {
+	public int getActor_3_facebook_likes() {
 		return actor_3_facebook_likes;
 	}
 
-	public void setActor_3_facebook_likes(double actor_3_facebook_likes) {
+	public void setActor_3_facebook_likes(int actor_3_facebook_likes) {
 		this.actor_3_facebook_likes = actor_3_facebook_likes;
 	}
 
@@ -168,11 +170,11 @@ public class Movie {
 		this.actor_2_name = actor_2_name;
 	}
 
-	public double getActor_1_facebook_likes() {
+	public int getActor_1_facebook_likes() {
 		return actor_1_facebook_likes;
 	}
 
-	public void setActor_1_facebook_likes(double actor_1_facebook_likes) {
+	public void setActor_1_facebook_likes(int actor_1_facebook_likes) {
 		this.actor_1_facebook_likes = actor_1_facebook_likes;
 	}
 
@@ -208,19 +210,19 @@ public class Movie {
 		this.movie_title = movie_title;
 	}
 
-	public double getNum_voted_users() {
+	public int getNum_voted_users() {
 		return num_voted_users;
 	}
 
-	public void setNum_voted_users(double num_voted_users) {
+	public void setNum_voted_users(int num_voted_users) {
 		this.num_voted_users = num_voted_users;
 	}
 
-	public double getCast_total_facebook_likes() {
+	public int getCast_total_facebook_likes() {
 		return cast_total_facebook_likes;
 	}
 
-	public void setCast_total_facebook_likes(double cast_total_facebook_likes) {
+	public void setCast_total_facebook_likes(int cast_total_facebook_likes) {
 		this.cast_total_facebook_likes = cast_total_facebook_likes;
 	}
 
@@ -232,11 +234,11 @@ public class Movie {
 		this.actor_3_name = actor_3_name;
 	}
 
-	public double getFacenumber_in_poster() {
+	public int getFacenumber_in_poster() {
 		return facenumber_in_poster;
 	}
 
-	public void setFacenumber_in_poster(double facenumber_in_poster) {
+	public void setFacenumber_in_poster(int facenumber_in_poster) {
 		this.facenumber_in_poster = facenumber_in_poster;
 	}
 
@@ -256,11 +258,11 @@ public class Movie {
 		this.movie_imdb_link = movie_imdb_link;
 	}
 
-	public double getNum_user_for_reviews() {
+	public int getNum_user_for_reviews() {
 		return num_user_for_reviews;
 	}
 
-	public void setNum_user_for_reviews(double num_user_for_reviews) {
+	public void setNum_user_for_reviews(int num_user_for_reviews) {
 		this.num_user_for_reviews = num_user_for_reviews;
 	}
 
@@ -304,11 +306,11 @@ public class Movie {
 		this.title_year = title_year;
 	}
 
-	public double getActor_2_facebook_likes() {
+	public int getActor_2_facebook_likes() {
 		return actor_2_facebook_likes;
 	}
 
-	public void setActor_2_facebook_likes(double actor_2_facebook_likes) {
+	public void setActor_2_facebook_likes(int actor_2_facebook_likes) {
 		this.actor_2_facebook_likes = actor_2_facebook_likes;
 	}
 
@@ -328,11 +330,11 @@ public class Movie {
 		this.aspect_ratio = aspect_ratio;
 	}
 
-	public double getMovie_facebook_likes() {
+	public int getMovie_facebook_likes() {
 		return movie_facebook_likes;
 	}
 
-	public void setMovie_facebook_likes(double movie_facebook_likes) {
+	public void setMovie_facebook_likes(int movie_facebook_likes) {
 		this.movie_facebook_likes = movie_facebook_likes;
 	}
 
@@ -359,5 +361,4 @@ public class Movie {
 	public void setRatio_imdb(String ratio_imdb) {
 		this.ratio_imdb = ratio_imdb;
 	}
-	
 }
