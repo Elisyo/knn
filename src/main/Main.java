@@ -61,7 +61,7 @@ public class Main {
 		
 		mapMovie = genererCalculDistanceMovieIMDB(movieTest, listeMovie);
 		mapMovie = triAvecValeurMovie(mapMovie);
-		genererResultatIMDB(mapMovie, resultat_imdb_score);
+		resultat_imdb_score = genererResultatIMDB(mapMovie, resultat_imdb_score);
 		System.out.println(predictionIMDB(resultat_imdb_score));
 		
 	}
@@ -291,7 +291,6 @@ public class Main {
 		int cpt = 0;
 
 		for (Entry<Iris, Double> entry : mapIris.entrySet()) {
-
 			if (cpt < 10) {
 				Iris cle = entry.getKey();
 				if (resultat.containsKey(cle.getGenre())){
@@ -305,7 +304,7 @@ public class Main {
 		}
 	}
 	
-	public static void genererResultatIMDB(HashMap<Movie, Double> mapMovie, HashMap<Double, Integer> resultat_imdb_score){
+	public static HashMap<Double, Integer> genererResultatIMDB(HashMap<Movie, Double> mapMovie, HashMap<Double, Integer> resultat_imdb_score){
 		int cpt = 0;
 
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
@@ -321,6 +320,7 @@ public class Main {
 				cpt++;
 			}
 		}
+		return resultat_imdb_score;
 	}
 
 	public static String predictionIris(HashMap<String, Integer> resultat){
@@ -346,7 +346,7 @@ public class Main {
 		for (Entry<Double, Integer> entry2 : resultat_imdb_score.entrySet()) {
 			Double cle2 = entry2.getKey();
 			int res = entry2.getValue();
-
+			System.out.println(cle2);
 			if (res > max){
 				max = res;
 				prediction = cle2;
