@@ -143,7 +143,15 @@ public class Main {
 					}
 					contenuLigne.add(ligne);
 					
-					result.add(new Movie(ligne, ligne, 0, 0, 0, 0, ligne, 0, 0, ligne, ligne, ligne, 0, 0, ligne, 0, ligne, ligne, 0, ligne, ligne, ligne, 0, null, 0, 0, 0, 0, 0));
+					result.add(new Movie((String) contenuLigne.get(0), (String) contenuLigne.get(1), (double) contenuLigne.get(2),
+							(double) contenuLigne.get(3), (double) contenuLigne.get(4), (double) contenuLigne.get(5),
+							(String) contenuLigne.get(6), (double) contenuLigne.get(7), (double) contenuLigne.get(8),
+							(String) contenuLigne.get(9), (String) contenuLigne.get(10), (String) contenuLigne.get(11),
+							(double) contenuLigne.get(12), (double) contenuLigne.get(13), (String) contenuLigne.get(14),
+							(double) contenuLigne.get(15), (String) contenuLigne.get(16), (String) contenuLigne.get(17),
+							(double) contenuLigne.get(18), (String) contenuLigne.get(19), (String) contenuLigne.get(20),
+							(String) contenuLigne.get(21), (double) contenuLigne.get(22), null, (double) contenuLigne.get(24),
+							(double) contenuLigne.get(25), (double) contenuLigne.get(26), (double) contenuLigne.get(27), (double) contenuLigne.get(28)));
 				}
 				System.out.println("ligne : " + ligne);
 			}
