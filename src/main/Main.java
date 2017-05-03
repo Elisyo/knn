@@ -67,8 +67,8 @@ public class Main {
 		System.out.println("Pour notre 'MovieTest', ses prédictions sont :");
 		System.out.println("- Son score imdb sera : " + predictionIMDB(resultat_imdb_score));
 		System.out.println("- Son ratio de rentabilite sera : "+ predictionRR(resultat_ratio_rentabilite));
+		
 		measures(listeMovie);
-
 	}
 
 	/**
@@ -230,7 +230,7 @@ public class Main {
 		int cpt = 0;
 
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
-			if (cpt < 100) {
+			if (cpt < 10) {
 				Movie cle = entry.getKey();
 				if (mapMovie.containsKey(cle.getRatio_imdb())) {
 					int repetition = resultat_imdb_score.get(cle
@@ -251,7 +251,7 @@ public class Main {
 		int cpt = 0;
 
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
-			if (cpt < 100) {
+			if (cpt < 10) {
 				Movie cle = entry.getKey();
 				if (mapMovie.containsKey(cle.getStatut_rentabilite())) {
 					int repetition = resultat_ratio_rentabilite.get(cle
@@ -315,6 +315,9 @@ public class Main {
 		int tauxEP_imdb = 0;
 		int tauxEF_imdb = 0;
 		double tauxErreur_imdb = 0.0;
+		double precision_imdb = 0.0;
+		HashMap<String,Integer> statutIMDB = new HashMap<String,Integer>();
+		statutIMDB.put("mauvais",1);statutIMDB.put("passable",2);statutIMDB.put("moyen",3);statutIMDB.put("divertissant",4);statutIMDB.put("a_voir",5);
 		
 		int tpRate_rr=0;
 		int fpRate_rr = 0;
@@ -323,20 +326,27 @@ public class Main {
 		int tauxEP_rr = 0;
 		int tauxEF_rr = 0;
 		double tauxErreur_rr = 0.0;
+		double precision_rr = 0.0;
+		HashMap<String,Integer> statutRatioR = new HashMap<String,Integer>();
+		statutRatioR.put("pas_rentable",1);statutRatioR.put("peu_rentable",2);statutRatioR.put("rentable",3);statutRatioR.put("bien_rentable",4);statutRatioR.put("tres_rentable",5);
+		
 		
 		for(int i=0;i<listeMovie.size();i++){
 			mapMovie = genererCalculDistanceMovie(listeMovie.get(i), listeMovie);
 			mapMovie = triAvecValeurMovie(mapMovie);
 			resultat_imdb_score = genererResultatIMDB(mapMovie, resultat_imdb_score);
-			resultat_ratio_rentabilite = genererResultatRR(mapMovie,
-					resultat_ratio_rentabilite);
+			resultat_ratio_rentabilite = genererResultatRR(mapMovie,resultat_ratio_rentabilite);
 			if((!predictionIMDB(resultat_imdb_score).equals("mauvais") && listeMovie.get(i).equals("mauvais")) || 
 					(!predictionIMDB(resultat_imdb_score).equals("passable") && listeMovie.get(i).equals("passable")) ||
 					(!predictionIMDB(resultat_imdb_score).equals("moyen") && listeMovie.get(i).equals("moyen")) ||
 					(!predictionIMDB(resultat_imdb_score).equals("divertissant") && listeMovie.get(i).equals("divertissant")) ||
 					(!predictionIMDB(resultat_imdb_score).equals("a_voir") && listeMovie.get(i).equals("a_voir"))){
 				fpRate_imdb=fpRate_imdb+1;
-			}
+			}/*
+			if(predictionIMDB(resultat_imdb_score).equals()){
+				
+			}*/
+			
 			if(predictionIMDB(resultat_imdb_score).equals(listeMovie.get(i).getRatio_imdb())){
 				tauxEP_imdb=tauxEP_imdb+1;
 				tpRate_imdb=tpRate_imdb+1;
@@ -344,6 +354,7 @@ public class Main {
 				tauxEF_imdb=tauxEF_imdb+1;
 			}
 
+			// prevu comme _______ mais ne sont pas
 			if((!predictionRR(resultat_ratio_rentabilite).equals("pas_rentable") && listeMovie.get(i).equals("pas_rentable")) || 
 					(!predictionRR(resultat_ratio_rentabilite).equals("peu_rentable") && listeMovie.get(i).equals("peu_rentable")) ||
 					(!predictionRR(resultat_ratio_rentabilite).equals("rentable") && listeMovie.get(i).equals("rentable")) ||
@@ -366,8 +377,10 @@ public class Main {
 		tauxTP_imdb = ((double)tpRate_imdb/(double)listeMovie.size())*100;
 		System.out.printf("Taux de vrais positifs : %.2f" , tauxTP_imdb);System.out.println("% ("+tpRate_imdb+"/"+listeMovie.size()+")");
 		tauxFP_imdb = (double)fpRate_imdb/(double)listeMovie.size();
-		//System.out.println((double)fpRate_imdb+" : "+(double)listeMovie.size());
-		//System.out.println("Taux de faux positifs : " + tauxFP_imdb);
+		System.out.println((double)fpRate_imdb+" : "+(double)listeMovie.size());
+		System.out.println("Taux de faux positifs : " + tauxFP_imdb);
+		precision_imdb = (double)tpRate_imdb/((double)tpRate_imdb+(double)fpRate_imdb);
+		System.out.println("Precision : "+ precision_imdb);
 		
 		System.out.println("-------Mesures : Ratio rentabilite-------");
 		// taux à 79,33% car on a 5 classes
@@ -376,7 +389,9 @@ public class Main {
 		tauxTP_rr = ((double)tpRate_rr/(double)listeMovie.size())*100;
 		System.out.printf("Taux de vrais positifs : %.2f" , tauxTP_rr);System.out.println("% ("+tpRate_rr+"/"+listeMovie.size()+")");
 		tauxFP_rr = (double)fpRate_rr/(double)listeMovie.size();
-		//System.out.println((double)fpRate_rr+" : "+(double)listeMovie.size());
-		//System.out.println("Taux de faux positifs : " + tauxFP_rr);
+		System.out.println((double)fpRate_rr+" : "+(double)listeMovie.size());
+		System.out.println("Taux de faux positifs : " + tauxFP_rr);
+		precision_rr = (double)tpRate_rr/((double)tpRate_rr+(double)fpRate_rr);
+		System.out.println("Precision : "+ precision_rr + " ("+tpRate_rr+"/("+tpRate_rr+"+"+fpRate_rr+"))");
 	}
 }
