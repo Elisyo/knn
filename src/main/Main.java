@@ -18,10 +18,20 @@ import java.util.Map.Entry;
 
 public class Main {
 
+	private static int minActor1_facebook_likes = 0;
+	private static int maxActor1_facebook_likes = 0;
+	private static int minActor2_facebook_likes = 0;
+	private static int maxActor2_facebook_likes = 0;
+	private static int minActor3_facebook_likes = 0;
+	private static int maxActor3_facebook_likes = 0;
+	private static int minBudget = 0;
+	private static int maxBudget = 0;
+	private static int minDuration = 0;
+	private static int maxDuration = 0;
+	
 	/**
 	 * @param args
 	 */
-
 	public static void main(String[] args) {
 		executeMovie();
 	}
@@ -67,8 +77,14 @@ public class Main {
 		System.out.println("Pour notre 'MovieTest', ses prédictions sont :");
 		System.out.println("- Son score imdb sera : " + predictionIMDB(resultat_imdb_score));
 		System.out.println("- Son ratio de rentabilite sera : "+ predictionRR(resultat_ratio_rentabilite));
-		
 		measures(listeMovie);
+		
+		System.out.println("min et max");
+		System.out.println(minActor1_facebook_likes + ", " + maxActor1_facebook_likes);
+		System.out.println(minActor2_facebook_likes + ", " + maxActor2_facebook_likes);
+		System.out.println(minActor3_facebook_likes + ", " + maxActor3_facebook_likes);
+		System.out.println(minBudget + ", " + maxBudget);
+		System.out.println(minDuration + ", " + maxDuration);
 	}
 
 	/**
@@ -144,16 +160,59 @@ public class Main {
 
 					try {
 						Movie movie = new Movie();
-						movie.setActor_1_facebook_likes(Integer
-								.parseInt(contenuLigne.get(7)));
-						movie.setActor_2_facebook_likes(Integer
-								.parseInt(contenuLigne.get(24)));
-						movie.setActor_3_facebook_likes(Integer
-								.parseInt(contenuLigne.get(5)));
+						movie.setActor_1_facebook_likes(Integer.parseInt(contenuLigne.get(7)));
+						if(minActor1_facebook_likes==0 && maxActor1_facebook_likes==0){
+							minActor1_facebook_likes=Integer.parseInt(contenuLigne.get(7));
+							maxActor1_facebook_likes=Integer.parseInt(contenuLigne.get(7));
+						}else if(Integer.parseInt(contenuLigne.get(7))<minActor1_facebook_likes){
+							minActor1_facebook_likes=Integer.parseInt(contenuLigne.get(7));
+						}else if(Integer.parseInt(contenuLigne.get(7))>maxActor1_facebook_likes){
+							maxActor1_facebook_likes=Integer.parseInt(contenuLigne.get(7));
+						}
+						
+						movie.setActor_2_facebook_likes(Integer.parseInt(contenuLigne.get(24)));
+						if(minActor2_facebook_likes==0 && maxActor2_facebook_likes==0){
+							minActor2_facebook_likes=Integer.parseInt(contenuLigne.get(24));
+							maxActor2_facebook_likes=Integer.parseInt(contenuLigne.get(24));
+						}else if(Integer.parseInt(contenuLigne.get(24))<minActor2_facebook_likes){
+							minActor2_facebook_likes=Integer.parseInt(contenuLigne.get(24));
+						}else if(Integer.parseInt(contenuLigne.get(24))>maxActor2_facebook_likes){
+							maxActor2_facebook_likes=Integer.parseInt(contenuLigne.get(24));
+						}
+						
+						movie.setActor_3_facebook_likes(Integer.parseInt(contenuLigne.get(5)));
+						if(minActor3_facebook_likes==0 && maxActor3_facebook_likes==0){
+							minActor3_facebook_likes=Integer.parseInt(contenuLigne.get(5));
+							maxActor3_facebook_likes=Integer.parseInt(contenuLigne.get(5));
+						}else if(Integer.parseInt(contenuLigne.get(5))<minActor3_facebook_likes){
+							minActor3_facebook_likes=Integer.parseInt(contenuLigne.get(5));
+						}else if(Integer.parseInt(contenuLigne.get(5))>maxActor3_facebook_likes){
+							maxActor3_facebook_likes=Integer.parseInt(contenuLigne.get(5));
+						}
+						
 						movie.setBudget(Integer.parseInt(contenuLigne.get(22)));
+						if(minBudget==0 && maxBudget==0){
+							minBudget=Integer.parseInt(contenuLigne.get(22));
+							maxBudget=Integer.parseInt(contenuLigne.get(22));
+						}else if(Integer.parseInt(contenuLigne.get(22))<minBudget){
+							minBudget=Integer.parseInt(contenuLigne.get(22));
+						}else if(Integer.parseInt(contenuLigne.get(22))>maxBudget){
+							maxBudget=Integer.parseInt(contenuLigne.get(22));
+						}
+						
 						movie.setRatio_imdb(contenuLigne.get(30));
 						movie.setStatut_rentabilite(contenuLigne.get(29));
+						
 						movie.setDuration(Integer.parseInt(contenuLigne.get(3)));
+						if(minDuration==0 && maxDuration==0){
+							minDuration=Integer.parseInt(contenuLigne.get(3));
+							maxDuration=Integer.parseInt(contenuLigne.get(3));
+						}else if(Integer.parseInt(contenuLigne.get(3))<minDuration){
+							minDuration=Integer.parseInt(contenuLigne.get(3));
+						}else if(Integer.parseInt(contenuLigne.get(3))>maxDuration){
+							maxDuration=Integer.parseInt(contenuLigne.get(3));
+						}
+						
 						result.add(movie);
 						nbLigneConserve++;
 					} catch (Exception e) {
@@ -189,28 +248,25 @@ public class Main {
 		HashMap<Movie, Double> mapMovie = new HashMap<Movie, Double>();
 
 		for (int i = 0; i < listeMovie.size(); i++) {
-			double distanceActor_1_facebook_likes = (movieTest
-					.getActor_1_facebook_likes() - listeMovie.get(i)
-					.getActor_1_facebook_likes())
-					* (movieTest.getActor_1_facebook_likes() - listeMovie
-							.get(i).getActor_1_facebook_likes());
-			double distanceActor_2_facebook_likes = (movieTest
-					.getActor_2_facebook_likes() - listeMovie.get(i)
-					.getActor_2_facebook_likes())
-					* (movieTest.getActor_2_facebook_likes() - listeMovie
-							.get(i).getActor_2_facebook_likes());
-			double distanceActor_3_facebook_likes = (movieTest
-					.getActor_3_facebook_likes() - listeMovie.get(i)
-					.getActor_3_facebook_likes())
-					* (movieTest.getActor_3_facebook_likes() - listeMovie
-							.get(i).getActor_3_facebook_likes());
-			double distanceBudget = (movieTest.getBudget() - listeMovie.get(i)
-					.getBudget())
-					* (movieTest.getBudget() - listeMovie.get(i).getBudget());
-			double distanceDuration = (movieTest.getDuration() - listeMovie
-					.get(i).getDuration())
-					* (movieTest.getDuration() - listeMovie.get(i)
-							.getDuration());
+			double distanceActor_1_facebook_likes = 
+					((movieTest.getActor_1_facebook_likes() - listeMovie.get(i).getActor_1_facebook_likes())/(maxActor1_facebook_likes - minActor1_facebook_likes))*
+					((movieTest.getActor_1_facebook_likes() - listeMovie.get(i).getActor_1_facebook_likes())/(maxActor1_facebook_likes - minActor1_facebook_likes));
+			
+			double distanceActor_2_facebook_likes = 
+					((movieTest.getActor_2_facebook_likes() - listeMovie.get(i).getActor_2_facebook_likes())/(maxActor2_facebook_likes - minActor2_facebook_likes))*
+					((movieTest.getActor_2_facebook_likes() - listeMovie.get(i).getActor_2_facebook_likes())/(maxActor2_facebook_likes - minActor2_facebook_likes));
+			
+			double distanceActor_3_facebook_likes = 
+					((movieTest.getActor_3_facebook_likes() - listeMovie.get(i).getActor_3_facebook_likes())/(maxActor3_facebook_likes - minActor3_facebook_likes))*
+					((movieTest.getActor_3_facebook_likes() - listeMovie.get(i).getActor_3_facebook_likes())/(maxActor3_facebook_likes - minActor3_facebook_likes));
+			
+			double distanceBudget = 
+					((movieTest.getBudget() - listeMovie.get(i).getBudget())/(maxBudget - minBudget))*
+					((movieTest.getBudget() - listeMovie.get(i).getBudget())/(maxBudget - minBudget));
+			
+			double distanceDuration = 
+					((movieTest.getDuration() - listeMovie.get(i).getDuration())/(maxDuration - minDuration))*
+					((movieTest.getDuration() - listeMovie.get(i).getDuration())/(maxDuration - minDuration));
 
 			/*
 			 * CF conclusion sur les acteurs de l'imdb_score
