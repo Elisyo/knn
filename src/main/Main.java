@@ -130,8 +130,6 @@ public class Main {
 	 * @return
 	 */
 	public static ArrayList<Movie> madeMovieObject(String chaine) {
-		int nbLigneFichier = 0;
-		int nbLigneConserve = 0;
 		ArrayList<Movie> result = new ArrayList<Movie>();
 		ArrayList<String> contenuLigne = new ArrayList<String>();
 		try {
@@ -142,7 +140,6 @@ public class Main {
 			String ligne;
 			while ((ligne = br.readLine()) != null) {
 				if (ligne.length() > 0) {
-					nbLigneFichier++;
 					contenuLigne.clear();
 					for (int i = 0; i < 30; i++) {
 						if (ligne.substring(0, ligne.indexOf(','))
@@ -214,7 +211,6 @@ public class Main {
 						}
 						
 						result.add(movie);
-						nbLigneConserve++;
 					} catch (Exception e) {
 					}
 				}
@@ -284,16 +280,17 @@ public class Main {
 			HashMap<Movie, Double> mapMovie,
 			HashMap<String, Integer> resultat_imdb_score) {
 		int cpt = 0;
-
+		int repetition = 0;
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
 			if (cpt < 10) {
 				Movie cle = entry.getKey();
-				if (mapMovie.containsKey(cle.getRatio_imdb())) {
-					int repetition = resultat_imdb_score.get(cle
-							.getRatio_imdb());
-					resultat_imdb_score.put(cle.getRatio_imdb(), ++repetition);
-				} else {
-					resultat_imdb_score.put(cle.getRatio_imdb(), 1);
+				if(cle.getRatio_imdb()!=null){
+					if(resultat_imdb_score.get(cle.getRatio_imdb())==null){
+						resultat_imdb_score.put(cle.getRatio_imdb(), 1);
+					}else{
+						repetition = resultat_imdb_score.get(cle.getRatio_imdb());
+						resultat_imdb_score.put(cle.getRatio_imdb(), ++repetition);
+					}
 				}
 				cpt++;
 			}
@@ -305,18 +302,17 @@ public class Main {
 			HashMap<Movie, Double> mapMovie,
 			HashMap<String, Integer> resultat_ratio_rentabilite) {
 		int cpt = 0;
-
+		int repetition = 0;
 		for (Entry<Movie, Double> entry : mapMovie.entrySet()) {
 			if (cpt < 10) {
 				Movie cle = entry.getKey();
-				if (mapMovie.containsKey(cle.getStatut_rentabilite())) {
-					int repetition = resultat_ratio_rentabilite.get(cle
-							.getStatut_rentabilite());
-					resultat_ratio_rentabilite.put(cle.getStatut_rentabilite(),
-							++repetition);
-				} else {
-					resultat_ratio_rentabilite.put(cle.getStatut_rentabilite(),
-							1);
+				if(cle.getStatut_rentabilite()!=null){
+					if(resultat_ratio_rentabilite.get(cle.getStatut_rentabilite())==null){
+						resultat_ratio_rentabilite.put(cle.getStatut_rentabilite(), 1);
+					}else{
+						repetition = resultat_ratio_rentabilite.get(cle.getStatut_rentabilite());
+						resultat_ratio_rentabilite.put(cle.getStatut_rentabilite(),++repetition);
+					}
 				}
 				cpt++;
 			}
@@ -390,16 +386,8 @@ public class Main {
 			resultat_imdb_score = genererResultatIMDB(mapMovie, resultat_imdb_score);
 			prediction_imdb_score=predictionIMDB(resultat_imdb_score);
 			
-			///////////////////////////////////////////////////////////////////////////////
-			System.out.println(resultat_imdb_score+"->"+prediction_imdb_score);
-			///////////////////////////////////////////////////////////////////////////////
-			
 			resultat_ratio_rentabilite = genererResultatRR(mapMovie,resultat_ratio_rentabilite);
 			prediction_statut_RR=predictionRR(resultat_ratio_rentabilite);
-			
-			///////////////////////////////////////////////////////////////////////////////
-			System.out.println(resultat_ratio_rentabilite+"->"+prediction_statut_RR);
-			///////////////////////////////////////////////////////////////////////////////
 			
 			if((!prediction_imdb_score.equals("mauvais") && listeMovie.get(i).equals("mauvais")) || 
 					(!prediction_imdb_score.equals("passable") && listeMovie.get(i).equals("passable")) ||
@@ -411,9 +399,6 @@ public class Main {
 			if(predictionIMDB(resultat_imdb_score).equals()){
 				
 			}*/
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//System.out.println("resultat_imdb_score : "+predictionIMDB(resultat_imdb_score)+" Vs "+"getRatio_imdb() : "+listeMovie.get(i).getRatio_imdb());
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			if(prediction_imdb_score.equals(listeMovie.get(i).getRatio_imdb())){
 			//if(resultat_imdb_score.containsKey(listeMovie.get(i).getRatio_imdb())){
@@ -431,10 +416,7 @@ public class Main {
 					(!prediction_statut_RR.equals("tres_rentable") && listeMovie.get(i).equals("tres_rentable"))){
 				fpRate_rr=fpRate_rr+1;
 			}
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//System.out.println("statut RR : "+predictionRR(resultat_ratio_rentabilite) +" Vs "+"getStatut_rent.() : "+(listeMovie.get(i).getStatut_rentabilite()));
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+			
 			if(prediction_statut_RR.equals(listeMovie.get(i).getStatut_rentabilite())){
 			//if(resultat_ratio_rentabilite.containsKey(listeMovie.get(i).getStatut_rentabilite())){
 				tauxEP_rr=tauxEP_rr+1;
